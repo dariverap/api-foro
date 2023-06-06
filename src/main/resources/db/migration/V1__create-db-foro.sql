@@ -1,0 +1,35 @@
+CREATE TABLE curso (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(255) NOT NULL,
+  categoria VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE usuario (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  contrasena VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE topico (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(255) NOT NULL,
+  mensaje VARCHAR(255) NOT NULL,
+  fecha_creacion DATETIME NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  autor_id BIGINT NOT NULL,
+  curso_id BIGINT NOT NULL,
+  FOREIGN KEY (autor_id) REFERENCES usuario (id),
+  FOREIGN KEY (curso_id) REFERENCES curso (id)
+);
+
+CREATE TABLE respuesta (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  mensaje VARCHAR(255) NOT NULL,
+  topico_id BIGINT NOT NULL,
+  fecha_creacion DATETIME NOT NULL,
+  autor_id BIGINT NOT NULL,
+  solucion BOOLEAN NOT NULL,
+  FOREIGN KEY (topico_id) REFERENCES topico (id),
+  FOREIGN KEY (autor_id) REFERENCES usuario (id)
+);
